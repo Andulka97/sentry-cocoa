@@ -1,31 +1,34 @@
 import Sentry
 import UIKit
 
-class PerformanceViewController: UIViewController {
+class BenchmarkingViewController: UIViewController {
     private let valueTextField = UITextField(frame: .zero)
+    private let startButton = UIButton(type: .roundedRect)
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
+        let views = [valueTextField, startButton]
+        startButton.setTitle("Start", for: .normal)
+        startButton.setTitleColor(.blue, for: .normal)
+        startButton.addTarget(self, action: #selector(benchmarkStart), for: .touchUpInside)
+
         valueTextField.accessibilityLabel = "io.sentry.benchmark.value-marshaling-text-field"
-        valueTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(valueTextField)
+
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.axis = .vertical
+        (views + [stack]).forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        view.addSubview(stack)
         NSLayoutConstraint.activate([
-            valueTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            valueTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20)
+            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        valueTextField.isHidden = true
 
         view.backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        startTest()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,9 +46,14 @@ class PerformanceViewController: UIViewController {
     private let iterations = 5_000_000
     private let range = 1..<Double.greatestFiniteMagnitude
     private var transaction: Span?
+
+    @objc func benchmarkStart() {
+        startButton.isEnabled = false
+        startTest()
+    }
 }
 
-private extension PerformanceViewController {
+private extension BenchmarkingViewController {
     func doWork(withNumber a: Double) -> Double {
         var b: Double
         if arc4random() % 2 == 0 {
@@ -92,8 +100,8 @@ private extension PerformanceViewController {
             return
         }
 
-        valueTextField.isHidden = false
         valueTextField.text = "\(value)"
+        startButton.isEnabled = true
 
         SentrySDK.configureScope {
             $0.setContext(value: [

@@ -13,12 +13,17 @@
     //    XCTSkipIf(isSimulator() && !isDebugging());
 
     NSMutableArray *results = [NSMutableArray array];
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    app.launchArguments =
+    [app.launchArguments arrayByAddingObject:@"--io.sentry.test.benchmarking"];
+    [app launch];
+    [app.buttons[@"Performance scenarios"] tap];
     for (NSUInteger j = 0; j < 20; j++) {
-        XCUIApplication *app = [[XCUIApplication alloc] init];
-        app.launchArguments =
-            [app.launchArguments arrayByAddingObject:@"--io.sentry.test.benchmarking"];
-        [app launch];
-        [app.buttons[@"Performance scenarios"] tap];
+        XCUIElement *startButton = app.buttons[@"Start"];
+        if (![startButton waitForExistenceWithTimeout:5.0]) {
+            XCTFail(@"Couldn't find start button.");
+        }
+        [startButton tap];
 
         // after navigating to the test, the test app will do CPU intensive work until hitting the
         // stop button. wait 15 seconds so that work can be done while the profiler does its thing,
@@ -56,6 +61,7 @@
         XCTAssertNotEqual(usagePercentage, 0, @"Overhead percentage should be > 0%%");
 
         [results addObject:@(usagePercentage)];
+
     }
 }
 

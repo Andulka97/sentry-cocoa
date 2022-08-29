@@ -276,7 +276,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func performanceScenarios(_ sender: Any) {
-        let controller = PerformanceViewController()
+        let controller = BenchmarkingViewController()
         controller.title = "Performance Scenarios"
         navigationController?.pushViewController(controller, animated: false)
     }
