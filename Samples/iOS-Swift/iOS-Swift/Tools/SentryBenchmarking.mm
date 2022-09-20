@@ -61,7 +61,7 @@ cpuInfoByThread()
     return dict;
 }
 
-const auto frequencyHz = 10;
+const auto frequencyHz = 1001;
 const auto intervalNs = 1e9 / frequencyHz;
 
 NSMutableArray<NSDictionary<NSString *, NSArray<NSNumber *> *> *> *samples =
@@ -128,6 +128,8 @@ dispatch_queue_t queue;
                 systemTimeTotals[key] = @(systemTimeDelta + systemTimeTotals[key].integerValue);
                 userTimeTotals[key] = @(userTimeDelta + userTimeTotals[key].integerValue);
             }
+
+            NSLog(@"[Benchmarking] logged values: systemTimeTotal: %@; systemTimeTotals: %@", systemTimeTotals[key], userTimeTotals[key]);
         }
     }
 

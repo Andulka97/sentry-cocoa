@@ -79,4 +79,5 @@ Package.resolved
 .vscode/
 
 Cartfile.resolved
+benchmarks/
 *.log

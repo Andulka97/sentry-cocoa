@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "637AFDA5243B02760034958B"
-               BuildableName = "iOS-Swift.app"
-               BlueprintName = "iOS-Swift"
+               BlueprintIdentifier = "D8269A38274C095E00BD5BD5"
+               BuildableName = "iOS13-Swift.app"
+               BlueprintName = "iOS13-Swift"
                ReferencedContainer = "container:iOS-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "637AFDA5243B02760034958B"
-            BuildableName = "iOS-Swift.app"
-            BlueprintName = "iOS-Swift"
+            BlueprintIdentifier = "D8269A38274C095E00BD5BD5"
+            BuildableName = "iOS13-Swift.app"
+            BlueprintName = "iOS13-Swift"
             ReferencedContainer = "container:iOS-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "637AFDA5243B02760034958B"
-            BuildableName = "iOS-Swift.app"
-            BlueprintName = "iOS-Swift"
+            BlueprintIdentifier = "D8269A38274C095E00BD5BD5"
+            BuildableName = "iOS13-Swift.app"
+            BlueprintName = "iOS13-Swift"
             ReferencedContainer = "container:iOS-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
