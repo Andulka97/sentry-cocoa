@@ -4,13 +4,70 @@
 
 static const int kSentryBenchmarkIterations = 5;
 
+// TODO: add @"Render image", @"Scroll UITableView", @"Network download", @"Network upload",
+// @"Network stream up", @"Network stream down", @"Network stream mixed", @"WebKit render",
+// @"Load empty DB", @"Load DB with entities", @"Create entity", @"Fetch entity", @"Update
+// entity", @"Delete entity", @"Data encrypt" after implementing them in
+// BenchmarkingViewController
 @interface SentrySDKPerformanceBenchmarkTests : XCTestCase
 
 @end
 
 @implementation SentrySDKPerformanceBenchmarkTests
 
-- (void)testBenchmarks
+- (void)testFileWrite
+{
+    [self performSelectedBenchmark:@"File write"];
+}
+
+- (void)testFileRead
+{
+    [self performSelectedBenchmark:@"File read"];
+}
+
+- (void)testFileCopy
+{
+    [self performSelectedBenchmark:@"File copy"];
+}
+
+- (void)testFileDelete
+{
+    [self performSelectedBenchmark:@"File delete"];
+}
+
+- (void)testCPUWork
+{
+    [self performSelectedBenchmark:@"CPU work"];
+}
+
+- (void)testCPUIdle
+{
+    [self performSelectedBenchmark:@"CPU idle"];
+}
+
+- (void)testDataCompression
+{
+    [self performSelectedBenchmark:@"Data compression"];
+}
+
+- (void)testDataSHA1Sum
+{
+    [self performSelectedBenchmark:@"Data SHA1 sum"];
+}
+
+- (void)testJSONEncode
+{
+    [self performSelectedBenchmark:@"JSON Encode"];
+}
+
+- (void)testJSONDecode
+{
+    [self performSelectedBenchmark:@"JSON Decode"];
+}
+
+#pragma mark - Private
+
+- (void)performSelectedBenchmark:(NSString *)benchmark
 {
     //    XCTSkipIf(isSimulator() && !isDebugging());
 
@@ -20,22 +77,6 @@ static const int kSentryBenchmarkIterations = 5;
     [app launch];
     [app.buttons[@"Benchmarks"] tap];
 
-    // TODO: add @"Render image", @"Scroll UITableView", @"Network download", @"Network upload",
-    // @"Network stream up", @"Network stream down", @"Network stream mixed", @"WebKit render",
-    // @"Load empty DB", @"Load DB with entities", @"Create entity", @"Fetch entity", @"Update
-    // entity", @"Delete entity", @"Data encrypt" after implementing them in
-    // BenchmarkingViewController
-    for (NSString *benchmark in @[
-             @"File write", @"File read", @"File copy", @"File delete", @"CPU work", @"CPU idle",
-             @"Data compression", @"Data SHA1 sum", @"JSON Encode", @"JSON Decode"
-         ]) {
-        [self performSelectedBenchmark:benchmark];
-    }
-}
-
-- (void)performSelectedBenchmark:(NSString *)benchmark
-{
-    XCUIApplication *app = [[XCUIApplication alloc] init];
     NSMutableArray *results = [NSMutableArray array];
     for (NSUInteger j = 0; j < kSentryBenchmarkIterations; j++) {
         const auto cpuWorkRow = app.staticTexts[benchmark];
