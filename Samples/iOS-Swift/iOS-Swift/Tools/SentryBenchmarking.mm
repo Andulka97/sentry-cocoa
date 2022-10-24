@@ -129,7 +129,8 @@ dispatch_queue_t queue;
                 userTimeTotals[key] = @(userTimeDelta + userTimeTotals[key].integerValue);
             }
 
-            NSLog(@"[Benchmarking] logged values: systemTimeTotal: %@; systemTimeTotals: %@", systemTimeTotals[key], userTimeTotals[key]);
+            NSLog(@"[Benchmarking] logged values: systemTimeTotal: %@; systemTimeTotals: %@",
+                systemTimeTotals[key], userTimeTotals[key]);
         }
     }
 
