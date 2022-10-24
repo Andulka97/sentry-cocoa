@@ -1,8 +1,8 @@
 import BigInt
 import CryptoKit
 import Sentry
-import UIKit
 import SwiftUI
+import UIKit
 
 class BenchmarkingViewController: UIViewController {
     private let imageView = UIImageView(frame: .zero)
@@ -167,7 +167,7 @@ private extension BenchmarkingViewController {
 //            ("Networking", [.network_download, .network_upload, .network_stream_up, .network_stream_down, .network_stream_both]),
 //            ("WebKit", [.renderWebpageInWebKit]),
 //            ("CoreData", [.coreData_loadDB_Empty, .coreData_loadDB_WithEntities, .coreData_entity_create, .coreData_entity_fetch, .coreData_entity_update, .coreData_entity_delete]),
-            ("Data", [.data_compress, /*.data_encrypt, .data_decrypt,*/ .data_shasum]),
+            ("Data", [.data_compress, /*.data_encrypt, .data_decrypt,*/ .data_shasum])
         ]
     }
 
@@ -319,7 +319,7 @@ extension BenchmarkingViewController: UITableViewDataSource {
         view.addSubview(tv)
         var constraints = [
             tv.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tv.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tv.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         if #available(iOS 11.0, *) {
             constraints.append(contentsOf: [
