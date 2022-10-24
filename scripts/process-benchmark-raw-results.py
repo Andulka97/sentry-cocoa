@@ -125,7 +125,7 @@ def main():
 
     report += '</table>'
 
-    with open('benchmarks/report.html', 'w') as report_file:
+    with open(f'benchmarks/report_{args.device_class}_{args.device_name}.html', 'w') as report_file:
         report_file.write(report)
 
 if __name__ == '__main__':
