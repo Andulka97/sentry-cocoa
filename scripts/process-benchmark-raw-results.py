@@ -4,6 +4,7 @@ import argparse
 import functools
 import math
 import matplotlib.pyplot as plt
+import os
 import re
 import subprocess
 import sys
@@ -65,6 +66,7 @@ def generate_report(benchmark, results, device_class, device_name):
     benchmark_slug = benchmark.lower().replace(' ', '-')
     filename = f'ios_benchmarks_{device_class}_{device_name}_{benchmark_slug}.png'
     plt.savefig(f'benchmarks/{filename}')
+    plt.clf()
 
     report = f'''
     <tr>
@@ -96,6 +98,8 @@ def main():
 
     with open(args.log_file_path, 'r') as log_file:
         results = [extract_values(x) for x in log_file.read().splitlines() if 'Sentry Benchmark' in x]
+
+    os.makedirs('benchmarks', exist_ok=True)
 
     results_per_benchmark = {}
     for result in results:
