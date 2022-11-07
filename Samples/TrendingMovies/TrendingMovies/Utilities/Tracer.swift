@@ -28,7 +28,7 @@ extension Tracer {
         }
 
         SentrySDK.start { options in
-            options.dsn = "https://fff20ae0c1d141fda99ba8bdedd0e9cd@o447951.ingest.sentry.io/6509889"
+            options.dsn = "https://5d5ea6127ab24401a2f343829de3139e@6487-72-74-53-227.ngrok.io/1"
             options.debug = true
             options.sessionTrackingIntervalMillis = 5_000
             // Sampling 100% - In Production you probably want to adjust this
