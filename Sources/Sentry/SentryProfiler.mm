@@ -46,6 +46,7 @@
 
 const int kSentryProfilerFrequencyHz = 101;
 NSString *const kTestStringConst = @"test";
+NSTimeInterval kSentryProfilerTimeoutInterval = 30;
 
 using namespace sentry::profiling;
 
@@ -202,15 +203,6 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
 + (void)startWithHub:(SentryHub *)hub
 {
-    NSTimeInterval timeoutInterval = 30;
-#    if defined(TEST) || defined(TESTCI)
-    timeoutInterval = 1;
-#    endif
-    [self startWithTimeoutInterval:timeoutInterval hub:hub];
-}
-
-+ (void)startWithTimeoutInterval:(NSTimeInterval)timeoutInterval hub:(SentryHub *)hub
-{
     std::lock_guard<std::mutex> l(_gProfilerLock);
 
     if (_gCurrentProfiler) {
@@ -231,7 +223,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     [_gCurrentProfiler start];
 
     _gCurrentProfiler->_timeoutTimer =
-        [NSTimer scheduledTimerWithTimeInterval:timeoutInterval
+        [NSTimer scheduledTimerWithTimeInterval:kSentryProfilerTimeoutInterval
                                          target:self
                                        selector:@selector(timeoutAbort)
                                        userInfo:nil
@@ -367,7 +359,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     const auto transactionInfo = [self serializeInfoForTransaction:transaction
                                                    profileDuration:profileDuration];
     if (transactionInfo) {
-        payload[@"transaction"] = transactionInfo;
+        payload[@"transactions"] = @[ transactionInfo ];
     }
 
     return [self envelopeItemForProfileData:payload profileID:profileID];

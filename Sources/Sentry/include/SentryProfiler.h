@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT const int kSentryProfilerFrequencyHz;
 FOUNDATION_EXPORT NSString *const kTestStringConst;
+FOUNDATION_EXPORT NSTimeInterval kSentryProfilerTimeoutInterval;
 
 SENTRY_EXTERN_C_BEGIN
 

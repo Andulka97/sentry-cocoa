@@ -74,12 +74,6 @@
                   Identifier = "SentryNetworkTrackerIntegrationTests/testGetRequest_SpanCreatedAndBaggageHeaderAdded_disabled()">
                </Test>
                <Test
-                  Identifier = "SentryProfilerSwiftTests/testConcurrentSpansWithTimeout_disabled()">
-               </Test>
-               <Test
-                  Identifier = "SentryProfilerSwiftTests/testProfileTimeoutTimer_disabled()">
-               </Test>
-               <Test
                   Identifier = "SentrySDKIntegrationTestsBase">
                </Test>
                <Test
