@@ -283,7 +283,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
                                                              (lastIndex - firstIndex) + 1 }]];
 }
 
-+ (SentryEnvelopeItem *)captureProfilingEnvelopeItemForTransaction:(SentryTransaction *)transaction
++ (SentryEnvelopeItem *)createProfilingEnvelopeItemForTransaction:(SentryTransaction *)transaction
 {
     std::lock_guard<std::mutex> l(_gProfilerLock);
 
